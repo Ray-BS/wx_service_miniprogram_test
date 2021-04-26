@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "微丰小小客服"
 			}
+		},
+		{
+			"path": "pages/weifenghelper/index",
+			"style": {
+				"navigationBarTitleText": "微丰小客服"
+			}
 		}
 	],
 	"globalStyle": {
