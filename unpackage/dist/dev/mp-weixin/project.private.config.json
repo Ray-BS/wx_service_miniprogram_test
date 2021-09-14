@@ -13,9 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "test",
-          "pathName": "pages/index/index",
-          "query": "scene=2222",
+          "name": "pages/weifenghelper/index",
+          "pathName": "pages/weifenghelper/index",
+          "query": "scene=2222&agent=29",
           "scene": null
         }
       ]

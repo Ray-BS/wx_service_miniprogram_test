@@ -155,6 +155,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
 var _request = _interopRequireDefault(__webpack_require__(/*! @/common/request.js */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -179,18 +189,28 @@ var _request = _interopRequireDefault(__webpack_require__(/*! @/common/request.j
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = { data: function data() {return { title: '基于企业微信的新一代CRM', service_btn: '点击接入在线客服', bgUrl: '/static/bg-img.png', logoUrl: '/static/logo.png', //获取用户openid的域名
-      weifeng: '', userInfo: {}, customerVisble: false, acceptVisble: false, codeType: 1, // 二维码类型 1:单聊转客服 2:群聊转客服
-      loginType: 1 // 登陆环境  1微信  2企业微信
-    };}, onLoad: function onLoad(option) {console.log(option);var that = this;wx.getSystemInfo({ success: function success(res) {if (res.environment) {that.loginType = 2;}} }); // 获取二维码参数
-    if (option.scene) {
-      var weifengSessionId = decodeURIComponent(option.scene);
-      if (weifengSessionId.slice(-1) === "1") {
-        this.weifeng = weifengSessionId;
-      } else {
-        this.codeType = 2;
-        this.weifeng = weifengSessionId + 'openId:';
-      }
+      weifeng: '', userInfo: {}, customerVisble: false, acceptVisble: false, codeType: 1, // 转客服类型 1:单聊转客服 2:群聊转客服
+      loginType: 1, // 登陆环境  1微信  2企业微信
+      agent_id: null, group_id: null };}, onLoad: function onLoad(option) {console.log(option);var that = this;wx.getSystemInfo({ success: function success(res) {if (res.environment) {that.loginType = 2;}} }); // 获取转客服参数
+    if (option.scene) {var weifengSessionId = decodeURIComponent(option.scene);if (weifengSessionId.slice(-1) === "1") {this.weifeng = weifengSessionId;} else {this.codeType = 2;this.weifeng = weifengSessionId + 'openId:';}}
+    if (option.agent) {
+      var agentId = decodeURIComponent(option.agent);
+      this.agent_id = JSON.stringify({ agent_id: agentId });
+    }
+    if (option.group) {
+      var groupId = decodeURIComponent(option.group);
+      this.group_id = JSON.stringify({ group_id: groupId });
     }
     this.acceptVisble = true;
   },

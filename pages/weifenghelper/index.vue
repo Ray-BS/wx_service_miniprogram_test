@@ -10,8 +10,18 @@
 			<text class="title">{{title}}</text>
 		</view>
 		<view class="turn" v-show="customerVisble">
-			<button class="turn-btn" open-type="contact" size="mini"
+			<button v-if="!agent_id&&!group_id" class="turn-btn" open-type="contact" size="mini"
 				session-from="udesk|{{userInfo.nickName}}|{{userInfo.avatarUrl}}|weifeng^{{weifeng}}"
+				>
+				{{service_btn}}
+			</button>
+			<button v-if="agent_id" class="turn-btn" open-type="contact" size="mini"
+				session-from="udesk|{{userInfo.nickName}}|{{userInfo.avatarUrl}}|weifeng^{{weifeng}}|assign^{{agent_id}}"
+				>
+				{{service_btn}}
+			</button>
+			<button v-if="group_id" class="turn-btn" open-type="contact" size="mini"
+				session-from="udesk|{{userInfo.nickName}}|{{userInfo.avatarUrl}}|weifeng^{{weifeng}}|assign^{{group_id}}"
 				>
 				{{service_btn}}
 			</button>
@@ -36,12 +46,14 @@
 				userInfo: {},
 				customerVisble: false,
 				acceptVisble: false,
-				codeType: 1, // 二维码类型 1:单聊转客服 2:群聊转客服
+				codeType: 1, // 转客服类型 1:单聊转客服 2:群聊转客服
 				loginType:1, // 登陆环境  1微信  2企业微信
+				agent_id:null,
+				group_id:null,
 			}
 		},
 		onLoad(option) {
-			console.log(option);
+			// console.log(option);
 			let that = this;
 			wx.getSystemInfo({
 				success(res){
@@ -50,7 +62,7 @@
 					}
 				}
 			})
-			// 获取二维码参数
+			// 获取转客服参数
 			if (option.scene) {
 				let weifengSessionId = decodeURIComponent(option.scene);
 				if (weifengSessionId.slice(-1) === "1") {
@@ -59,6 +71,14 @@
 					this.codeType = 2;
 					this.weifeng = weifengSessionId+'openId:';
 				}
+			}
+			if(option.agent){
+				let agentId = option.agent;
+				this.agent_id = JSON.stringify({agent_id:agentId}) ;
+			}
+			if(option.group){
+				let groupId = option.group;
+				this.group_id = JSON.stringify({group_id:groupId}) ;
 			}
 			this.acceptVisble = true;
 		},
@@ -106,17 +126,17 @@
 				}else{
 					let that = this;
 					uni.showToast({
-					    title: '请您在微信中扫码打开～',
+					    title: '请您在微信中打开～',
 					    icon: 'none'
 					});
-					// wx.getUserInfo({
+					// uni.getUserInfo({
 					// 	success:function(res){
 					// 		that.userInfo = res.userInfo;
 					// 		if (that.codeType === 1) {
 					// 			that.acceptVisble = false;
 					// 			that.customerVisble = true;
 					// 		}else{
-					// 			wx.qy.login({
+					// 			uni.login({
 					// 			      success: function(res) {
 					// 					  uni.showLoading({
 					// 					      title: '加载中'
