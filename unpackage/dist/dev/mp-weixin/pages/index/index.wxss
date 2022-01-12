@@ -28,12 +28,8 @@
 	margin-bottom: 40rpx;
 }
 .text-area {
-	display: -webkit-box;
-	display: -webkit-flex;
 	display: flex;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	        justify-content: center;
+	justify-content: center;
 }
 .title {
 	font-size: 36rpx;
@@ -44,12 +40,8 @@
 	position: absolute;
 	bottom: 160rpx;
 	width: 100%;
-	display: -webkit-box;
-	display: -webkit-flex;
 	display: flex;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	        justify-content: center;
+	justify-content: center;
 }
 .turn-btn {
 	display: block;

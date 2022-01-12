@@ -1,13 +1,16 @@
 <template>
 	<view class="content">
-		<view class="content-bg">
+		<!-- <view class="content-bg">
 			<image class="content-bg-image" :src='bgUrl'></image>
-		</view>
+		</view> -->
 		<view class="logo">
 			<image class="logo-image" :src='logoUrl'></image>
+			<image class="scrm-image" :src='scrmUrl'></image>
 		</view>
 		<view class="text-area">
-			<text class="title">{{title}}</text>
+			<text class="title">在线客服即时沟通</text>
+			<text>与专业人员沟通，随时随地解决您的问题</text>
+			<text>点击按钮立即发起咨询</text>
 		</view>
 		<view class="turn" v-show="customerVisble">
 			<button v-if="!agent_id&&!group_id" class="turn-btn" open-type="contact" size="mini"
@@ -27,7 +30,7 @@
 			</button>
 		</view>
 		<view class="turn" v-show="acceptVisble">
-			<button class="turn-btn" lang="zh_CN" @click='onGotUserInfo'>授权账号信息</button>
+			<button class="turn-btn" lang="zh_CN" @click='onGotUserInfo'>点击授权</button>
 		</view>
 	</view>
 </template>
@@ -39,8 +42,9 @@
 			return {
 				title: '基于企业微信的新一代CRM',
 				service_btn: '点击接入在线客服',
-				bgUrl: '/static/bg-img.png',
+				// bgUrl: '/static/bg-img.png',
 				logoUrl: '/static/logo.png',
+				scrmUrl: '/static/scrmbg.png',
 				//获取用户openid的域名
 				weifeng: '',
 				userInfo: {},
@@ -183,9 +187,10 @@
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
+		height: 100%;
 	}
 
-	.content-bg-image {
+	/* .content-bg-image {
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -195,7 +200,7 @@
 		right: 0px;
 		position: absolute;
 		z-index: -1;
-	}
+	} */
 
 	.logo {
 		width: 100%;
@@ -203,26 +208,36 @@
 	}
 
 	.logo-image {
-		height: 48px;
-		width: 139px;
-		margin-top: 220rpx;
-		margin-bottom: 40rpx;
+		height: 28px;
+		width: 184px;
+		margin-top: 80rpx;
+		margin-bottom: 20rpx;
+	}
+	.scrm-image{
+		width: 288px;
+		height: 288px;
+		margin-bottom: 30rpx;
 	}
 
 	.text-area {
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		font-size: 14px;
+		color: rgba(0, 0, 0, 0.45);
+		line-height: 24px;
 	}
 
 	.title {
-		font-size: 36rpx;
-		color: #fff;
-		line-height: 52rpx;
+		font-size: 16px;
+		color: rgba(0, 0, 0, 0.85);
+		font-weight: 500;
+		line-height: 36px;
 	}
 
 	.turn {
 		position: absolute;
-		bottom: 160rpx;
+		bottom: 120rpx;
 		width: 100%;
 		display: flex;
 		justify-content: center;
@@ -239,5 +254,19 @@
 		margin: 0 auto;
 		font-size: 32rpx;
 		color: #fff;
+	}
+	@media screen and (max-width: 350px) {
+		.scrm-image{
+			width: 240px;
+			height: 240px;
+		}
+		.turn{
+			bottom: 80rpx;
+		}
+	}
+	@media screen and (min-width: 400px) {
+		.text-area{
+			margin-top: 40rpx;
+		}
 	}
 </style>
